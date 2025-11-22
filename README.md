@@ -14,7 +14,7 @@ NEXUS, Türk ERP sistemlerinden (Logo, SAP, Mikro, Canias) process mining için 
 
 ---
 
-## ✅ Başarılar (22 Kasım 2024)
+## ✅ Başarılar (22 Kasım 2025)
 
 ### Gerçek Test Sonuçları:
 - ✅ **5,000 satır** Logo purchase data işlendi
@@ -275,18 +275,18 @@ kubectl apply -f k8s/
 
 ## 📝 Versiyon Geçmişi
 
-### v1.0 (22 Kasım 2024)
+### v1.0 (22 Kasım 2025)
 - ✅ Tüm modüller tamamlandı
 - ✅ 5,000 satır gerçek veri testi
 - ✅ DISCO uyumluluğu doğrulandı
 - ✅ Production-ready
 
-### v0.7 (18 Kasım 2024)
+### v0.7 (18 Kasım 2025)
 - ✅ M5: Event Builder
 - ✅ M7: XES Writer
 - ✅ Demo test başarılı
 
-### v0.5 (17 Kasım 2024)
+### v0.5 (17 Kasım 2025)
 - ✅ M1: Database Schema
 - ✅ M3: AI Mapping Engine
 
