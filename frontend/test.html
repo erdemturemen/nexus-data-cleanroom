@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>NEXUS Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 { color: #667eea; }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        button:hover { opacity: 0.8; }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            min-height: 50px;
+        }
+        .upload-area {
+            border: 2px dashed #667eea;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        input[type="file"] { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 NEXUS Data Cleanroom</h1>
+        <p>Logo ERP → Process Mining</p>
+        
+        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+            <p>📁 CSV dosyasını seç veya sürükle</p>
+            <input type="file" id="fileInput" accept=".csv">
+        </div>
+        
+        <button onclick="testAPI()">1️⃣ API Test</button>
+        <button onclick="uploadCSV()">2️⃣ CSV Yükle</button>
+        <button onclick="getStats()">3️⃣ İstatistikler</button>
+        
+        <div id="result">Sonuçlar burada görünecek...</div>
+    </div>
+
+    <script>
+        const API = 'http://localhost:8000';
+        let selectedFile = null;
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            selectedFile = e.target.files[0];
+            document.getElementById('result').innerHTML = 
+                `✅ Dosya seçildi: ${selectedFile.name}`;
+        });
+
+        async function testAPI() {
+            try {
+                const response = await fetch(API);
+                const data = await response.json();
+                document.getElementById('result').innerHTML = 
+                    `✅ API Çalışıyor!<br>` +
+                    `📍 Status: ${data.status}<br>` +
+                    `🔢 Version: ${data.version}`;
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `❌ Hata: ${error.message}`;
+            }
+        }
+
+        async function uploadCSV() {
+            if (!selectedFile) {
+                document.getElementById('result').innerHTML = 
+                    '❌ Önce bir CSV dosyası seçin!';
+                return;
+            }
+            document.getElementById('result').innerHTML = 
+                '📤 Yükleniyor...';
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            
+            try {
+                const response = await fetch(`${API}/api/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                document.getElementById('result').innerHTML = 
+                    `✅ Yüklendi!<br>` +
+                    `📊 Satırlar: ${data.rows || 'N/A'}<br>` +
+                    `📋 Kolonlar: ${data.columns || 'N/A'}`;
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `❌ Yükleme hatası: ${error.message}`;
+            }
+        }
+
+        async function getStats() {
+            try {
+                const response = await fetch(`${API}/health`);
+                const data = await response.json();
+                document.getElementById('result').innerHTML = 
+                    `✅ Sistem Durumu: ${data.status}`;
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `❌ Hata: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

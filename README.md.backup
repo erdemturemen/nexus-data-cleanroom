@@ -1,0 +1,254 @@
+# NEXUS Data Cleanroom 1.0
+
+AI-powered data cleaning and event log generation system for ERP data.
+
+## 🎯 Features
+
+- ✅ Multi-ERP support (SAP, Logo, Mikro, Canias)
+- ✅ AI-assisted column mapping (Heuristic + Embedding + LLM)
+- ✅ Data quality validation and anomaly detection
+- ✅ Event log generation for process mining
+- ✅ Human-in-the-loop review console
+- ✅ Local LLM support (Ollama + Qwen2.5)
+
+## 🏗️ Architecture
+
+ERP Systems → M2 (Connectors) → M3 (AI Mapping) → M4 (Quality Check)
+→ M5 (Event Builder) → M6 (Review Console) → M7 (Event Log Storage)
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.10+
+- PostgreSQL 15+
+- Ollama (optional)
+- Node.js 18+ (for frontend)
+
+### Installation
+
+1. Create virtual environment
+python -m venv venv
+source venv/bin/activate
+
+2. Install dependencies
+pip install -r requirements.txt
+
+3. Setup database
+python scripts/setup_database.py
+
+4. Run test
+python scripts/quick_start.py
+
+## 📦 Modules
+
+- M1: Canonical Schema & Metadata Registry
+- M2: Source Connector & Schema Profiler
+- M3: AI-Assisted ERP Mapping Engine ⭐
+- M4: Data Quality & Anomaly Detector
+- M5: Event Builder & Case Constructor
+- M6: Human-in-the-Loop Review Console
+- M7: Canonical Event Log Storage
+
+## 👨‍💻 Author
+
+Erdem Türemen - NEXUS Project
+
+---
+
+## 📝 Development Status
+
+**Last Updated:** 17 Kasım 2024
+
+### ✅ Completed (Session 1)
+
+#### M1: Database Schema
+- `01_canonical_fields.sql` ✅
+- `02_erp_systems.sql` ✅
+- `03_erp_mappings.sql` ✅
+- `04_erp_lexicons.sql` ✅
+- `05_quality_rules.sql` ✅
+- `06_quality_metrics.sql` ✅
+
+#### M3: AI Mapping Engine (WORKING!) 🎉
+- `features.py` - ColumnProfile ✅
+- `heuristics.py` - Rule-based mapping ✅
+- `embeddings.py` - Semantic similarity ✅
+- `llm_mapper.py` - Local LLM (Ollama) ✅
+- `decision_engine.py` - Weighted consensus ✅
+
+#### Test Results
+- ✅ **SAP EKKO.EBELN → po_id** (confidence: 0.99)
+- ✅ HeuristicMapper: Working
+- ✅ Import system: Working
+
+### ⏳ Todo (Next Session)
+
+- [ ] M2: Source Connectors & Schema Profiler
+  - SAP Connector
+  - Logo Connector
+  - Schema Profiler implementation
+  
+- [ ] M4: Data Quality & Anomaly Detector
+  - Quality rules implementation
+  - Anomaly detection
+  - Auto-fix suggestions
+  
+- [ ] M5: Event Builder & Case Constructor
+  - Event construction logic
+  - Case linking (PR→PO→GR→Invoice→Payment)
+  
+- [ ] M6: Review Console
+  - FastAPI backend
+  - React frontend
+  
+- [ ] M7: Event Log Storage
+  - XES format writer
+  - CSV/Parquet export
+  
+- [ ] Full Pipeline Integration & Test
+
+### 🚀 Quick Test
+```bash
+# Test M3 Mapping Engine
+python scripts/test_simple.py
+```
+
+Expected output: SAP EBELN → po_id (confidence: 0.99)
+
+---
+
+## 👨‍💻 Development Notes
+
+### Architecture Decisions
+- **Local LLM**: Qwen2.5:7b (better Turkish support than Llama)
+- **Embedding**: paraphrase-multilingual-mpnet-base-v2
+- **Database**: PostgreSQL 15+
+- **Mapping Strategy**: Heuristic (40%) + Embedding (20%) + LLM (40%)
+
+### Next Steps Priority
+1. Complete M2 (critical for data ingestion)
+2. Complete M4 (quality is crucial)
+3. Complete M5 (event construction)
+4. Build M6 & M7 (UI and output)
+5. End-to-end integration test
+
+
+---
+
+## 📝 Development Status
+
+**Last Updated:** 17 Kasım 2024
+
+### ✅ Completed (Session 1)
+
+#### M1: Database Schema
+- `01_canonical_fields.sql` ✅
+- `02_erp_systems.sql` ✅
+- `03_erp_mappings.sql` ✅
+- `04_erp_lexicons.sql` ✅
+- `05_quality_rules.sql` ✅
+- `06_quality_metrics.sql` ✅
+
+#### M3: AI Mapping Engine (WORKING!) 🎉
+- `features.py` - ColumnProfile ✅
+- `heuristics.py` - Rule-based mapping ✅
+- `embeddings.py` - Semantic similarity ✅
+- `llm_mapper.py` - Local LLM (Ollama) ✅
+- `decision_engine.py` - Weighted consensus ✅
+
+#### Test Results
+- ✅ **SAP EKKO.EBELN → po_id** (confidence: 0.99)
+- ✅ HeuristicMapper: Working
+
+### ⏳ Todo (Next Session)
+- [ ] M2: Connectors & Profiler
+- [ ] M4: Quality Checker
+- [ ] M5: Event Builder
+- [ ] M6: Review Console
+- [ ] M7: Event Log Storage
+
+### 🚀 Quick Test
+```bash
+python scripts/test_simple.py
+```
+
+
+---
+
+## 📝 Development Status
+
+**Last Updated:** 17 Kasım 2024
+
+### ✅ Completed (Session 1)
+
+#### M1: Database Schema
+- `01_canonical_fields.sql` ✅
+- `02_erp_systems.sql` ✅
+- `03_erp_mappings.sql` ✅
+- `04_erp_lexicons.sql` ✅
+- `05_quality_rules.sql` ✅
+- `06_quality_metrics.sql` ✅
+
+#### M3: AI Mapping Engine (WORKING!) 🎉
+- `features.py` - ColumnProfile ✅
+- `heuristics.py` - Rule-based mapping ✅
+- `embeddings.py` - Semantic similarity ✅
+- `llm_mapper.py` - Local LLM (Ollama) ✅
+- `decision_engine.py` - Weighted consensus ✅
+
+#### Test Results
+- ✅ **SAP EKKO.EBELN → po_id** (confidence: 0.99)
+- ✅ HeuristicMapper: Working
+- ✅ Import system: Working
+
+### ⏳ Todo (Next Session)
+
+- [ ] M2: Source Connectors & Schema Profiler
+  - SAP Connector
+  - Logo Connector
+  - Schema Profiler implementation
+  
+- [ ] M4: Data Quality & Anomaly Detector
+  - Quality rules implementation
+  - Anomaly detection
+  - Auto-fix suggestions
+  
+- [ ] M5: Event Builder & Case Constructor
+  - Event construction logic
+  - Case linking (PR→PO→GR→Invoice→Payment)
+  
+- [ ] M6: Review Console
+  - FastAPI backend
+  - React frontend
+  
+- [ ] M7: Event Log Storage
+  - XES format writer
+  - CSV/Parquet export
+  
+- [ ] Full Pipeline Integration & Test
+
+### 🚀 Quick Test
+```bash
+# Test M3 Mapping Engine
+python scripts/test_simple.py
+```
+
+Expected output: SAP EBELN → po_id (confidence: 0.99)
+
+---
+
+## 👨‍💻 Development Notes
+
+### Architecture Decisions
+- **Local LLM**: Qwen2.5:7b (better Turkish support than Llama)
+- **Embedding**: paraphrase-multilingual-mpnet-base-v2
+- **Database**: PostgreSQL 15+
+- **Mapping Strategy**: Heuristic (40%) + Embedding (20%) + LLM (40%)
+
+### Next Steps Priority
+1. Complete M2 (critical for data ingestion)
+2. Complete M4 (quality is crucial)
+3. Complete M5 (event construction)
+4. Build M6 & M7 (UI and output)
+5. End-to-end integration test
+
